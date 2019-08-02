@@ -1,6 +1,6 @@
 import time
 from pathlib import Path
-
+import readline
 
 class conf(object):
 
