@@ -35,8 +35,6 @@ class conf(object):
                 self.content_first = 1
                 self.content_end = lines[1:].index('---\n')
 
-                # print(self.content_first, self.content_end)
-
                 for line in lines[self.content_first: self.content_end+1]:
                     self.param.append(line.split(':')[0])
 
@@ -46,8 +44,6 @@ class conf(object):
         
         params_name = self.get_content_param_name()
 
-        # print(params_name)
-
         params_value = [eval("input('{}:')".format(item)) for item in params_name[1:]]
 
         params_value.insert(0, self.layout)
@@ -55,6 +51,12 @@ class conf(object):
         # params_value = ['test', 'test', 'test']
 
         params = dict(zip(params_name, params_value))
+
+        # if you want to use my program, please delete this code
+        # because It just for my blog. 
+        # start
+        params['categories'] = '[' + params['categories'] +']'
+        # end
 
         self.title = params['title']
 
