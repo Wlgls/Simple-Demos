@@ -6,7 +6,7 @@ class conf(object):
 
     def __init__(self):
 
-        self.base_dir = '/home/smith/Desktop/test/file/'
+        self.base_dir = '/home/smith/myblog/_posts/'
 
         self.title_format = '%Y-%m-%d-{}.md'
 
@@ -46,13 +46,13 @@ class conf(object):
         
         params_name = self.get_content_param_name()
 
-        print(params_name)
+        # print(params_name)
 
-        """ params_value = [eval("input('{}:')".format(item)) for item in params_name[1:]]
+        params_value = [eval("input('{}:')".format(item)) for item in params_name[1:]]
 
-        params_value.insert(0, self.layout) """
+        params_value.insert(0, self.layout)
         
-        params_value = ['test', 'test', 'test']
+        # params_value = ['test', 'test', 'test']
 
         params = dict(zip(params_name, params_value))
 
@@ -75,6 +75,7 @@ class conf(object):
         
         return content
 
+
 class create_file(object):
 
     def __init__(self):
@@ -85,8 +86,6 @@ class create_file(object):
 
         self.file_title = self.conf.get_title_format().format(self.conf.title)
 
-        self.layout = self.conf.layout
-
         self.base_dir = self.conf.base_dir
 
 
@@ -94,7 +93,10 @@ class create_file(object):
     def make_file(self):
         
         p = Path(self.base_dir + self.file_title)
-        p.touch()
+
+        if not p.exists():
+            p.touch()
+
         p.write_text(self.content_format)
 
     
@@ -102,5 +104,4 @@ class create_file(object):
 
 if __name__ == '__main__':
 
-    cf = create_file()
-    cf.make_file()
+    create_file().make_file()
