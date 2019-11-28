@@ -6,13 +6,13 @@ class conf(object):
 
     def __init__(self):
 
-        self.base_dir = '/home/smith/myblog/_posts/'
+        self.base_dir = '/home/smith/Blog/_posts/'
 
         self.title_format = '%Y-%m-%d-{}.md'
 
         self.layout = 'post'
 
-        self.base_program_dir = '/home/smith/Script/create_file/'
+        self.base_program_dir = '/home/smith/Scripts/create_file/'
 
         self.content_format_file = self.base_program_dir + 'content_format.txt'
 
