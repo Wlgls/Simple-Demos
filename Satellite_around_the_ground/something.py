@@ -31,13 +31,22 @@ def drwa_my(ax2):
     z = np.zeros(len(result), dtype=np.uint8)
     ln2, = ax2.plot(x, y, z)
     return ln2
+def add(array):
+    global lr
+    lr = np.concatenate((lr, array), axis=0)
+    print(lr)
 
 if __name__ == '__main__':
-    fig = plt.figure(figsize=(9,6))
+    """ fig = plt.figure(figsize=(9,6))
     #添加参数projection
     ax1 = fig.add_subplot(121,projection='3d')
     draw_circle(ax1, 10)
     ax2 = fig.add_subplot(122,projection='3d')
     drwa_my(ax2)
     # drwa_my()
-    plt.show()
+    plt.show() """
+
+    global lr 
+    lr = np.array([[1,2]])
+    add(np.array([[3, 4]]))
+    add(np.array([[5, 6]]))
