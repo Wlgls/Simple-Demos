@@ -57,7 +57,7 @@ def data_gen(t, r, v):
     print(result[:, 2]>np.pi)
     print(np.all(result[:, 2] < np.pi*2))
     print(result[10050:10100, 2])
-    for i in range(0, len(result), 1000):
+    for i in range(0, len(result), 500):
         yield result[0:i]
 
 def update_one(result, r, angel, ln, ln2):
