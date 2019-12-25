@@ -12,7 +12,7 @@ class conf(object):
 
         self.layout = 'post'
 
-        self.base_program_dir = '/home/smith/Scripts/create_file/'
+        self.base_program_dir = '/home/smith/Projects/create_file/'
 
         self.content_format_file = self.base_program_dir + 'content_format.txt'
 
@@ -52,7 +52,7 @@ class conf(object):
 
         params = dict(zip(params_name, params_value))
 
-        # if you want to use my program, please delete this code
+        # if you want to use my program, please change this code
         # because It just for my blog. 
         # start
         params['categories'] = '[' + params['categories'] +']'
