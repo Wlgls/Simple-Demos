@@ -12,7 +12,7 @@ class conf(object):
 
         self.layout = 'post'
 
-        self.base_program_dir = '/home/smith/Projects/create_file/'
+        self.base_program_dir = '/home/smith/Projects/Gen_fixed_header_file/'
 
         self.content_format_file = self.base_program_dir + 'content_format.txt'
 
@@ -78,7 +78,7 @@ class conf(object):
         return content
 
 
-class create_file(object):
+class gen_file(object):
 
     def __init__(self):
 
@@ -106,4 +106,4 @@ class create_file(object):
 
 if __name__ == '__main__':
 
-    create_file().make_file()
+    gen_file().make_file()

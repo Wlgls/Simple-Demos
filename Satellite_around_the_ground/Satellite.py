@@ -54,9 +54,6 @@ def get_config(t, r=6400, v=10):
 def data_gen(t, r, v):
     """ 也许可以这么考虑吧，当我转过一圈之后，我就可以将线稳定下来，只将构成轨道的result传入，这样就节约了大量的内存 """
     result = get_config(t, r, v)
-    print(result[:, 2]>np.pi)
-    print(np.all(result[:, 2] < np.pi*2))
-    print(result[10050:10100, 2])
     for i in range(0, len(result), 500):
         yield result[0:i]
 
