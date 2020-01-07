@@ -1,8 +1,0 @@
----
-layout: {layout}
-title: {title}
-categories: {categories}
----
-
-* content
-{:toc}
