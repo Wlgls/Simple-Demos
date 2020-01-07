@@ -15,7 +15,8 @@ base_dir = '/home/smith/Blog/_posts'    # 文章所在目录
 title_format = '%Y-%m-%d-{}.md'     # 文章标题命名格式
 layout = 'post' # layout
 params_name = ['layout', 'title', 'categories'] # 文章的头标题
-content_header = '''---
+content_header = '''
+---
 layout: {layout}
 title: {title}
 categories: [{categories}]
@@ -43,16 +44,12 @@ def set_content(params):
 
 def touch(title, content):
     p = Path(base_dir +'/'+ title)
-
     if not p.exists():
         p.touch()
-
     p.write_text(content)
-
 
 if __name__ == '__main__':
     params = get_params()
     title = get_title(params)
     content = set_content(params)
-    
     touch(title, content)
