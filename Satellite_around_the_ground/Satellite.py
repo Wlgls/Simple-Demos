@@ -8,7 +8,6 @@
 @Contact :   smithguazi@gmail.com
 '''
 
-
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -16,7 +15,9 @@ import matplotlib.animation as amt
 from scipy.integrate import odeint
 from mpl_toolkits.mplot3d import Axes3D
 
-
+def d_y(w, t, k):
+        y1, y2, y3, y4 = w
+        return y3, y4, -k/(y1*y1)+y1*y4*y4, -2*y3*y4/y1
 
 def get_config(t, r=6400, v=10):
     """求解二阶微分方程，二阶微分方程见图片，为了便于求解，将二阶微分方程转换为一阶微分方程
@@ -40,15 +41,12 @@ def get_config(t, r=6400, v=10):
         [list]: 返回[y1, y2, y3, y4]
     """   
     ti = np.arange(0, t, 0.5)   # 以0.5切片，求解，离散量
-    def run(w, t, k):
-        y1, y2, y3, y4 = w
-        return y3, y4, -k/(y1*y1)+y1*y4*y4, -2*y3*y4/y1
-
+    
     k = 401408  # 地球重力系数
 
     w0 = (r, 0, 0, v/r) # 使用np.pi可以使卫星从左侧开始转圈圈
     
-    result = odeint(run, w0, ti, args=(k,))
+    result = odeint(d_y, w0, ti, args=(k,))
     return result
 
 def data_gen(t, r, v):
@@ -192,9 +190,6 @@ def draw_satellite(f, ax, r=6400, v=10, angel=0, track=1):
     else:
         # ani = amt.FuncAnimation(f, update,_two frames=np.arange(0, 50000, 100), fargs=(r, v, angel, ln, ln2),interval=2)
         ani = amt.FuncAnimation(f, update_one, frames=lambda:data_gen(100000, r, v), fargs=(r, angel, ln, ln2), interval=2)
-        # 这种方式比原始方式还要慢，也许是因为传的参数的内存太大了。。以至于导致了这种现象
-        # 如果你是mac用户，请注释上面，而将下面这句取消注释
-        # ani = amt.FuncAnimation(f, update,frames=range(0, 100000, 100),fargs=(r, v, angel),interval=2, blit=False)
     return f, ani, flag
 
 if __name__ == '__main__':

@@ -66,7 +66,7 @@ def find_pics(f, target):
                     pic_name = pic
             index.append(i)
             pics.append(pic_name)
-    print(len(pics))
+    # print(len(pics))
     return pics, index
 
 def repath_pic(pics, target):
