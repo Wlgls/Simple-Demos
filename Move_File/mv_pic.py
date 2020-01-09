@@ -3,7 +3,7 @@
 @File    :   rm_pic_redun.py
 @Time    :   2019/12/28 20:21:10
 @Author  :   Wlgls 
-@Version :   1.0
+@Version :   1.1
 @Contact :   smithguazi@gmail.com
 '''
 
@@ -26,19 +26,19 @@ def get_files(dir_name):
         return p.iterdir()
 
 
-def find_pics(f, target):
+def find_pics(f):
     """
     获取文件中的内容，并寻找文件中的图片的名字
-    由于前期就各种乱搞，有的是使用sm.ms的图床，有的又是基于网络路径的，本地看不了。
-    后来就使用typora，所以，匹配的可能要麻烦一些
     Args:
         f (PosixPath): 文件名称
-        target : 从网络上下载图片后保存的目录位置
-    
+        
     Returns:
         pics: 图片名称列表
         index: 文件索引位置
     """    
+    if isinstance(f, str):
+        f = Path(f)
+
     pics = []
     index = []
 
@@ -50,20 +50,14 @@ def find_pics(f, target):
         re_match = pattern.match(contents[i])
         if re_match != None: 
             re_match = re_match.groups()
-
             pic = re_match[1]# 这个是![]()小括号里的内容
 
-            # 由于最开始就各种尝试，所以就图片链接乱七八糟
-            pic_name = re.match(r'^https?:.*/(.*)$',pic)
-            if pic_name != None:
-                pic_name = 'image-'+re_match[0]
-                os.system('wget {} -O {}'.format(pic, target+pic_name))
+            pic_name = re.match(r'.*/(.*)$', pic)   # 这个是获取文件名，即 ../posts/(xxx.png)
+            if pic_name is None:
+                pic_name = pic
             else:
-                pic_name = re.match(r'.*/(.*)$', pic)
-                if pic_name != None:
-                    pic_name = pic_name.groups()[0]
-                else:
-                    pic_name = pic
+                pic_name = pic_name.groups()[0]
+       
             index.append(i)
             pics.append(pic_name)
     # print(len(pics))
@@ -124,11 +118,11 @@ def main():
     files = get_files(dir_name)
     for f in files:
         title = f.stem
-        print(title)
+        # print(title)
         pics, index = find_pics(f, base_name)
         repath_pic(pics, base_name+'/'+title)
         rewrite_pic_in_file(pics, index, f, tar_format)
-        input()
+        # input()
 
 
 if __name__ == '__main__':
@@ -136,4 +130,6 @@ if __name__ == '__main__':
     target = '/home/smith/Data/test/'
     f = Path(f)
     find_pics(f, target) """
+    # f = '/home/smith/wang.md'
+    # print(find_pics(f))
     main()
