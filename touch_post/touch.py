@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 import readline
 
-base_dir = '/home/smith/Data/Blog/_posts'    # 文章所在目录
+base_dir = '/home/wlgls/Data/Blog/_posts'    # 文章所在目录
 title_format = '%Y-%m-%d-{}.md'     # 文章标题命名格式
 layout = 'post' # layout
 params_name = ['layout', 'title', 'categories'] # 文章的头标题
